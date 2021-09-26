@@ -1,0 +1,47 @@
+lockfileVersion: 5.3
+
+specifiers:
+  bson: ^4.5.2
+  js-big-decimal: ^1.3.4
+  typescript: ^4.4.3
+
+dependencies:
+  js-big-decimal: 1.3.4
+
+devDependencies:
+  bson: 4.5.2
+  typescript: 4.4.3
+
+packages:
+
+  /base64-js/1.5.1:
+    resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    dev: true
+
+  /bson/4.5.2:
+    resolution: {integrity: sha512-8CEMJpwc7qlQtrn2rney38jQSEeMar847lz0LyitwRmVknAW8iHXrzW4fTjHfyWm0E3sukyD/zppdH+QU1QefA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      buffer: 5.7.1
+    dev: true
+
+  /buffer/5.7.1:
+    resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+    dev: true
+
+  /ieee754/1.2.1:
+    resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    dev: true
+
+  /js-big-decimal/1.3.4:
+    resolution: {integrity: sha512-wF8j7/WuGn/mwcgo7xofgeQTmJAf8uaiNRFWaM3usTn4NSQtyggdg8FofFumuVnvftWYEmHZBtxKgRK9hlOPiw==}
+    dev: false
+
+  /typescript/4.4.3:
+    resolution: {integrity: sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
