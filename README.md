@@ -96,4 +96,4 @@ Developed by [Chariz](https://chariz.com/):
 * [Aarnav Tale (@tale)](https://github.com/tale)
 
 ## License
-Licensed under the Apache License, version 2.0. Refer to [LICENSE.md](https://github.com/chariz/express-flash/blob/main/LICENSE.md).
+Licensed under the Apache License, version 2.0. Refer to [LICENSE.md](https://github.com/chariz/money-calc/blob/main/LICENSE.md).
