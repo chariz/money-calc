@@ -68,8 +68,15 @@ export default class Money {
 		return this.performOperation("divide", ...amounts);
 	}
 
-	mod(...amounts: MoneyInput[]): Money {
-		return this.performOperation("modulus", ...amounts);
+	mod(amount: MoneyInput): Money {
+		let modulus = new Money(amount);
+		if (!this.amount.endsWith(".00") || !modulus.amount.endsWith(".00")) {
+			throw new TypeError("Modulus of non-integers not supported");
+		}
+		let value = this.value
+			.round(0, RoundingModes.HALF_EVEN)
+			.modulus(modulus.value.round(0, RoundingModes.HALF_EVEN));
+		return new Money(value, this.currency);
 	}
 
 	percent(amount: MoneyInput): Money {
