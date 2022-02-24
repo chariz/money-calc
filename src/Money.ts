@@ -25,11 +25,9 @@ export default class Money {
 		// noinspection SuspiciousTypeOfGuard
 		if (typeof amount === "string") {
 			return new BigDecimal(amount);
-		}
-		if (typeof amount === "object") {
-			// BigDecimal - to be used internally by Money only. Return a copy of what we got in. Not
-			// really compliant to MoneyAmount because it could have more decimal places than two, but
-			// still acceptable.
+		} else if (typeof amount === "object" && amount !== null) {
+			// BigDecimal - return a copy of what we got in. Not really compliant to MoneyAmount because
+			// it could have more decimal places than two, but still acceptable.
 			if (amount instanceof BigDecimal) {
 				return new BigDecimal(amount.getValue());
 			}
@@ -108,6 +106,9 @@ export default class Money {
 
 	private performOperation(operation: MoneyOperation, ...args: MoneyInput[]): Money {
 		let method = BigDecimal.prototype[operation] as (input: BigDecimal) => BigDecimal;
+		// Ignore the lint warning, because it somewhat follows what the docs say about when reduce
+		// is acceptable.
+		// eslint-disable-next-line unicorn/no-array-reduce
 		let value = args.reduce(
 			(value: BigDecimal, arg: MoneyInput) => method.call(value, Money.getBigDecimalValue(arg)),
 			this.value
