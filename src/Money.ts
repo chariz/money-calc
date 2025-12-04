@@ -17,6 +17,18 @@ type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
  */
 export type MoneyAmount = `${"" | "-"}${number}.${Digit}${Digit}`;
 
+/** A JSON representation of a Money object. */
+export interface MoneyJSON {
+	/**
+	 * The string value that can be stored in a database or serialized into a payload such as JSON.
+	 * This amount is rounded to 2 decimal places, and is intended to be machine-readable.
+	 */
+	amount: MoneyAmount;
+
+	/** The currency of the amount. */
+	currency: Currency;
+}
+
 /**
  * A money input can be represented as:
  *
@@ -31,7 +43,7 @@ export type MoneyAmount = `${"" | "-"}${number}.${Digit}${Digit}`;
  *   directly to Money.
  * * You can also pass another instance of Money, or the simplified object returned by `Money.toJSON()`.
  */
-export type MoneyInput = Money | MoneyAmount | "0" | BigDecimal | Decimal128;
+export type MoneyInput = Money | MoneyAmount | "0" | MoneyJSON | BigDecimal | Decimal128;
 
 /** One of the supported operations. */
 type MoneyOperation = "add" | "subtract" | "multiply" | "divide" | "modulus";
@@ -51,7 +63,7 @@ export default class Money {
 	 * The string value that can be stored in a database or serialized into a payload such as JSON.
 	 * This amount is rounded to 2 decimal places, and is intended to be machine-readable. For a
 	 * human-readable string, use `toString()`.
-  */
+	 */
 	get amount(): MoneyAmount {
 		return this.value.round(2, RoundingModes.HALF_EVEN)
 			.getValue() as MoneyAmount;
@@ -71,7 +83,7 @@ export default class Money {
 			// Money - return a copy of the BigDecimal value if this is a full Money object, otherwise
 			// it is a JSON object, which will only have the rounded string amount.
 			if ("amount" in amount) {
-				if (amount.value !== undefined) {
+				if ("value" in amount && amount.value !== undefined) {
 					return new BigDecimal(amount.value.getValue());
 				}
 				return new BigDecimal(amount.amount);
@@ -203,7 +215,7 @@ export default class Money {
 	 *
 	 * @returns An object with `amount` and `currency` properties.
 	 */
-	toJSON(): { amount: MoneyAmount; currency: Currency } {
+	toJSON(): MoneyJSON {
 		const { amount, currency } = this;
 		return { amount, currency };
 	}
