@@ -7,13 +7,13 @@
 		"Aarnav Tale <tale@chariz.com>"
 	],
 	"license": "Apache-2.0",
-"type": "module",
+	"type": "module",
 	"types": "./dist/index.d.ts",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
-		"exports": {
+	"exports": {
 		".": {
-"types": "./dist/index.d.ts",
+			"types": "./dist/index.d.ts",
 			"require": "./dist/index.js",
 			"import": "./dist/index.mjs"
 		}
@@ -24,8 +24,7 @@
 		"lint:fix": "eslint --fix src/",
 		"prepublishOnly": "pnpm run build",
 		"push": "np",
-		"test": "pnpm -s lint && pnpm -s test:jest",
-		"test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+		"test": "pnpm -s lint && vitest run --coverage"
 	},
 	"keywords": [
 		"arithmetic",
@@ -57,16 +56,13 @@
 	},
 	"devDependencies": {
 		"@swc/core": "^1.15.3",
-		"@types/jest": "^30.0.0",
 		"@types/node": "^24.10.1",
-		"@typescript-eslint/eslint-plugin": "^8.48.1",
-		"@typescript-eslint/parser": "^8.48.1",
+		"@vitest/coverage-v8": "4.0.15",
 		"eslint": "^9.39.1",
 		"eslint-config-chariz": "^2.1.0",
-		"jest": "^30.2.0",
 		"np": "^10.2.0",
-		"ts-jest": "^29.4.6",
 		"tsup": "^8.5.1",
-		"typescript": "^5.9.3"
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.15"
 	}
 }
