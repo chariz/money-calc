@@ -51,7 +51,7 @@
 	},
 	"homepage": "https://github.com/chariz/money-calc#readme",
 	"dependencies": {
-		"bson": "^7.0.0",
+		"bson": "*",
 		"js-big-decimal": "^2.2.0"
 	},
 	"devDependencies": {
