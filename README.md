@@ -125,7 +125,7 @@ A money input can be represented as:
 * You can also pass another instance of Money, or the simplified object returned by [`Money.toJSON()`](#tojson--amount-moneyamount-currency-currency-).
 
 ### Currency
-Enumeration of all three-letter currency symbols that account for at least 1% of world trade, according to [xe.com](https://www.xe.com/popularity.php). Any other currency supported by ICU (the source of truth used by the [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl) classes) will work, however.
+Enumeration of all three-letter currency symbols that account for at least 1% of world trade, according to [xe.com](https://www.xe.com/popularity.php). Any other currency supported by ICU (the source of truth used by the [Intl](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Intl) classes) will work, however.
 
 ### ComparisonResult
 An enumeration of possible outcomes from a numeric comparison:
@@ -135,7 +135,6 @@ An enumeration of possible outcomes from a numeric comparison:
 * `ComparisonResult.Descending = 1`: The first number is greater than the second number.
 
 ### Money
-
 Money objects are immutable, and are designed to be used in a chainable sequence of operations.
 
 #### `new Money(amount: MoneyInput, currency?: Currency)`
@@ -157,8 +156,8 @@ Returns an instance of Money with the result of multiplying by the supplied amou
 #### `div(...amounts: MoneyInput[]): Money`
 Returns an instance of Money with the result of dividing by the supplied amounts in sequence.
 
-#### `mod(...amounts: MoneyInput[]): Money`
-Returns an instance of Money with the result of the modulus (division remainder) of the supplied amounts in sequence.
+#### `mod(amount: MoneyInput): Money`
+Returns an instance of Money with the result of the modulus (division remainder) of the supplied amount.
 
 #### `percent(amount: MoneyInput): Money`
 Returns an instance of Money with the result of multiplying by a percentage between `0.00` and `100.00`. This is effectively a shortcut for dividing the input amount by `100.00` before multiplying by that amount. If the percentage is between `0.00` and `1.00`, use [`mul()`](#mulamounts-moneyinput-money) instead.
@@ -175,7 +174,7 @@ Formats the money amount for display in a user interface. Includes the appropria
 #### `toJSON(): { amount: MoneyAmount; currency: Currency }`
 Returns an object that can be used to represent the Money in a JSON object. You can then initialise an instance of Money on the client side by using this as a `MoneyInput`, or directly pass these parameters to the number formatting mechanism for the platform.
 
-`toJSON()` is [called by](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#tojson_behavior) `JSON.stringify()` to retrieve a variant of the object that can be represented in JSON. As such, you likely won’t need to call this directly.
+`toJSON()` is [called by](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#tojson_behavior) `JSON.stringify()` to retrieve a variant of the object that can be represented in JSON. As such, you likely won’t need to call this directly.
 
 #### `amount: string`
 The string value that can be stored in a database or serialized into a payload such as JSON. This amount is rounded to 2 decimal places, and is intended to be machine-readable. For a human-readable string, use [`toString()`](#tostring-string).
