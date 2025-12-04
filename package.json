@@ -1,6 +1,6 @@
 {
 	"name": "money-calc",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "Helper class for calculating money amounts without rounding errors.",
 	"author": "Adam Demasi <adam@chariz.com>",
 	"contributors": [
