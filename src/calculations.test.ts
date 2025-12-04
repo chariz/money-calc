@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import Money from ".";
+import Money, { ComparisonResult } from ".";
 
 describe("calculations", () => {
 	it("adds", () => {
@@ -170,7 +170,7 @@ describe("calculations", () => {
 			.toEqual("-51.17");
 	});
 
-	it("negate", () => {
+	it("negates", () => {
 		expect(new Money("0.00")
 			.negate().amount)
 			.toEqual("0.00");
@@ -191,5 +191,47 @@ describe("calculations", () => {
 			.negate()
 			.add("123.45").amount)
 			.toEqual("0.00");
+	});
+
+	describe("cmp", () => {
+		it("compares equal amounts", () => {
+			const money1 = new Money("12.34");
+			const money2 = new Money("12.34");
+			expect(money1.cmp(money2))
+				.toEqual(ComparisonResult.Same);
+		});
+
+		it("compares greater than", () => {
+			const money1 = new Money("56.78");
+			const money2 = new Money("12.34");
+			expect(money1.cmp(money2))
+				.toEqual(ComparisonResult.Descending);
+		});
+
+		it("compares less than", () => {
+			const money1 = new Money("12.34");
+			const money2 = new Money("56.78");
+			expect(money1.cmp(money2))
+				.toEqual(-1);
+		});
+
+		it("compares string input", () => {
+			const money = new Money("12.34");
+			expect(money.cmp("12.34"))
+				.toEqual(ComparisonResult.Same);
+			expect(money.cmp("56.78"))
+				.toEqual(ComparisonResult.Ascending);
+			expect(money.cmp("1.00"))
+				.toEqual(ComparisonResult.Descending);
+		});
+
+		it("compares negative amounts", () => {
+			const money1 = new Money("-12.34");
+			const money2 = new Money("12.34");
+			expect(money1.cmp(money2))
+				.toEqual(ComparisonResult.Ascending);
+			expect(money2.cmp(money1))
+				.toEqual(ComparisonResult.Descending);
+		});
 	});
 });
