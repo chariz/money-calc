@@ -7,20 +7,21 @@
 		"Aarnav Tale <tale@chariz.com>"
 	],
 	"license": "Apache-2.0",
+"type": "module",
+	"types": "./dist/index.d.ts",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.ts",
-	"exports": {
+		"exports": {
 		".": {
+"types": "./dist/index.d.ts",
 			"require": "./dist/index.js",
-			"import": "./dist/index.mjs",
-			"types": "./dist/index.d.ts"
+			"import": "./dist/index.mjs"
 		}
 	},
 	"scripts": {
 		"build": "tsup ./src/index.ts --format cjs --target es5 --clean && tsup ./src/index.ts --format esm --target es2015 --dts",
-		"lint": "eslint ./src",
-		"lint:fix": "pnpm -s lint -- --fix",
+		"lint": "eslint src/",
+		"lint:fix": "eslint --fix src/",
 		"prepublishOnly": "pnpm run build",
 		"push": "np",
 		"test": "pnpm -s lint && pnpm -s test:jest",

@@ -69,18 +69,18 @@ export default class Money {
 	}
 
 	mod(amount: MoneyInput): Money {
-		let modulus = new Money(amount);
+		const modulus = new Money(amount);
 		if (!this.amount.endsWith(".00") || !modulus.amount.endsWith(".00")) {
 			throw new TypeError("Modulus of non-integers not supported");
 		}
-		let value = this.value
+		const value = this.value
 			.round(0, RoundingModes.HALF_EVEN)
 			.modulus(modulus.value.round(0, RoundingModes.HALF_EVEN));
 		return new Money(value, this.currency);
 	}
 
 	percent(amount: MoneyInput): Money {
-		let percent = Money.getBigDecimalValue(amount)
+		const percent = Money.getBigDecimalValue(amount)
 			.divide(new BigDecimal(100), 8);
 		return this.performOperation("multiply", percent);
 	}
@@ -94,12 +94,12 @@ export default class Money {
 	}
 
 	toJSON(): { amount: MoneyAmount; currency: Currency } {
-		let { amount, currency } = this;
+		const { amount, currency } = this;
 		return { amount, currency };
 	}
 
 	toString(): string {
-		let number = Number(this.amount);
+		const number = Number(this.amount);
 		if (Number.isNaN(number)) {
 			throw new TypeError("Money amount is not a number");
 		}
@@ -112,11 +112,11 @@ export default class Money {
 	}
 
 	private performOperation(operation: MoneyOperation, ...args: MoneyInput[]): Money {
-		let method = BigDecimal.prototype[operation] as (input: BigDecimal) => BigDecimal;
+		const method = BigDecimal.prototype[operation] as (input: BigDecimal) => BigDecimal;
 		// Ignore the lint warning, because it somewhat follows what the docs say about when reduce
 		// is acceptable.
 		// eslint-disable-next-line unicorn/no-array-reduce
-		let value = args.reduce(
+		const value = args.reduce(
 			(value: BigDecimal, arg: MoneyInput) => method.call(value, Money.getBigDecimalValue(arg)),
 			this.value
 		);
